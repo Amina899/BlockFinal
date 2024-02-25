@@ -1,5 +1,4 @@
-# Decentralized-Linkedin Public API Service
-
+# Web3LinkedIn
 ## Installation
 ### Import Dependencies
 cd api-service, npm install, npm start
