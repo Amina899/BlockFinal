@@ -1,0 +1,60 @@
+/* styles/profile.module.scss */
+
+@import 'header';
+@import 'footer';
+
+.profileContainer {
+  padding: 20px;
+
+  h1 {
+    color: #0070f3; // Replace with your preferred color
+  }
+
+  .userInfoContainer {
+    display: flex;
+    margin-top: 20px;
+
+    .avatarContainer {
+      margin-right: 20px; // Adjust the spacing between avatar and user information
+    }
+
+    .avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+    }
+
+    .userInfo {
+      display: flex;
+      flex-direction: column;
+
+      p {
+        margin: 5px 0;
+      }
+    }
+  }
+
+  .friendRequest {
+    margin-top: 20px;
+
+    p {
+      margin: 5px 0;
+    }
+
+    .acceptButton,
+    .rejectButton {
+      padding: 8px 16px;
+      margin-right: 10px;
+      font-size: 14px;
+      background-color: #28a745; // Accept button color
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+
+      &.rejectButton {
+        background-color: #dc3545; // Reject button color
+      }
+    }
+  }
+}
