@@ -50,13 +50,13 @@
 ## Demo Screenshots
 ### Profile Page
 
-![image](https://github.com/Amina899/BlockFinal/assets/124548089/523f507d-b919-473d-b0d5-3fc954c7bdf6)
+![image](https://github.com/Amina899/BlockFinal/assets/124548089/3bcdcd3d-51b0-439d-aa4f-9d49ce00db3b)
 
 The profile page displays detailed user information, including the avatar, address, bio, token balance, and token count. Users can customize their profiles and showcase their NFTs.
 
 ### Main Page
 
-![image](https://github.com/Amina899/BlockFinal/assets/124548089/94dc479c-6956-4895-b840-df71b0a5d246)
+![image](https://github.com/Amina899/BlockFinal/assets/124548089/db13d95d-594e-4e1b-9b8e-3ebb4aeaebce)
 
 The main page serves as the central hub for users, providing access to the news feed, network connections, job postings, and notifications. Users can stay informed about updates from their connections.
 
