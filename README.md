@@ -1,8 +1,8 @@
 # Web3LinkedIn
 ## Installation
 ### Import Dependencies
-cd api-service, npm install, npm start
-cd webclient, npm install, npm run start
+- cd api-service, npm install, npm start
+- cd webclient, npm install, npm run start
 
 ## Features
 
