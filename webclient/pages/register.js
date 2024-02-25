@@ -6,6 +6,7 @@ import Head from 'next/head';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Form, Button } from 'react-bootstrap';
 import NavbarComponent from '../components/NavbarComponent';
+import FooterComponent from "../components/FooterComponent";
 
 const RegisterPage = () => {
     const router = useRouter(); // Initialize the useRouter hook
@@ -53,12 +54,11 @@ const RegisterPage = () => {
             </Head>
 
             <Container className="mt-3">
-                <h2>Join LinkedIn</h2>
-                <p>Discover opportunities, connect with professionals, and more.</p>
+                <h2>Sign Up to LinkedIn</h2>
+                <p>Make connections, build career and enhance your portfolio.</p>
 
                 <Form onSubmit={handleRegister}>
                     <Form.Group className="mb-3" controlId="formBasicName">
-                        <Form.Label>Your Full Name</Form.Label>
                         <Form.Control
                             type="text"
                             placeholder="Enter your full name"
@@ -68,20 +68,15 @@ const RegisterPage = () => {
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>Email address</Form.Label>
                         <Form.Control
                             type="email"
                             placeholder="Enter your email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
-                        <Form.Text className="text-muted">
-                            We'll never share your email with anyone else.
-                        </Form.Text>
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicPassword">
-                        <Form.Label>Password</Form.Label>
                         <Form.Control
                             type="password"
                             placeholder="Password"
@@ -91,14 +86,12 @@ const RegisterPage = () => {
                     </Form.Group>
 
                     <Button variant="primary" type="submit">
-                        Join Now
+                        Sign Up
                     </Button>
                 </Form>
             </Container>
 
-            <footer className="text-center mt-5">
-                <p>&copy; 2024 LinkedIn Corporation</p>
-            </footer>
+            <FooterComponent />
         </div>
     );
 };

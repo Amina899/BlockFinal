@@ -1,13 +1,39 @@
 // components/NavbarComponent.js
 
 import React, { useEffect, useState } from 'react';
-import { Navbar, Container, Nav, Form, FormControl, Button } from 'react-bootstrap';
+import { Navbar, Container, Nav, Form, FormControl, Button, Badge } from 'react-bootstrap';
 import Cookies from 'js-cookie'; // Import the Cookies library
 import Link from 'next/link';
+
+const NotificationIcon = ({ count }) => (
+    <Link href="#notifications">
+        <Nav.Link>
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+            >
+                <g fill="none" fillRule="evenodd">
+                    <path d="M0 0h24v24H0z" />
+                    <path d="M4 21v-2a4 4 0 0 1 4-4h12a4 4 0 0 1 4 4v2" />
+                    <path d="M0 0h24v24H0z" />
+                </g>
+            </svg>
+            {count > 0 && <Badge bg="danger">{count}</Badge>}
+        </Nav.Link>
+    </Link>
+);
 
 const NavbarComponent = () => {
     const [isClient, setIsClient] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [notificationCount, setNotificationCount] = useState(3); // Example notification count
 
     useEffect(() => {
         setIsClient(true);
@@ -39,11 +65,6 @@ const NavbarComponent = () => {
                         <Nav.Link href="#network">Network</Nav.Link>
                         <Nav.Link href="#jobs">Jobs</Nav.Link>
                         <Nav.Link href="#notifications">Notifications</Nav.Link>
-                        {isLoggedIn && (
-                            <Link href={`/profile/${Cookies.get.userId}`}>
-                                Profile
-                            </Link>
-                        )}
                     </Nav>
                     {isClient && isLoggedIn && (
                         <>
@@ -53,14 +74,16 @@ const NavbarComponent = () => {
                             </Form>
                             <Nav className="ms-2">
                                 {/* Display the user's avatar */}
-                                <img
-                                    src="https://placekitten.com/100/100" // Replace with the URL of the user's actual avatar //
-                                    alt="User Avatar"
-                                    width="40"
-                                    height="40"
-                                    roundedCircle
-                                />
-                                {/* Add notifications icon or count here */}
+                                <Link href={`/profile/${Cookies.get.userId}`}>
+                                    <img
+                                        src="https://placekitten.com/100/100" // Replace with the URL of the user's actual avatar //
+                                        alt="User Avatar"
+                                        width="40"
+                                        height="40"
+                                        roundedCircle
+                                    />
+                                </Link>
+                                <NotificationIcon count={notificationCount} />
                             </Nav>
                             <Button variant="outline-danger" onClick={handleLogout} className="ms-2">
                                 Logout

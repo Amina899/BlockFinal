@@ -50,5 +50,8 @@ router.get('/:userId', async (req, res) => {
     }
 });
 
+router.post('/send-friend-request/:userId', profilesController.sendFriendRequest);
+
+
 
 module.exports = router;

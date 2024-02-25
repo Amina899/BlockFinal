@@ -57,4 +57,36 @@
       }
     }
   }
+
+  .sendFriendRequest {
+    margin-top: 20px;
+
+    h2 {
+      margin-bottom: 10px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+
+      label {
+        margin-bottom: 10px;
+      }
+
+      input {
+        padding: 8px;
+        margin-bottom: 10px;
+      }
+
+      button {
+        padding: 10px;
+        font-size: 16px;
+        background-color: #0070f3; // Button color
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    }
+  }
 }
