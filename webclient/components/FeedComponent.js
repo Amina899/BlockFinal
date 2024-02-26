@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Card } from 'react-bootstrap';
 import Cookies from 'js-cookie';
+import styles from '../styles/main-content.module.scss';
 
 const FeedComponent = () => {
     const [posts, setPosts] = useState([]);
@@ -84,15 +85,17 @@ const FeedComponent = () => {
             </Form>
 
             {posts.map((post) => (
-                <Card key={post.id} className="mb-3">
-                    <Card.Body>
-                        <Card.Title>
+                <div key={post.id} className={styles.postContainer}>
+                    <div className={styles.postContent}>
+                        <img src={post.author_avatar} alt="Author Avatar" />
+                        <p>
                             <strong>{post.author}</strong>
-                        </Card.Title>
-                        <Card.Text>{post.content}</Card.Text>
-                        <small className="text-muted">Posted on {new Date(post.createdAt).toLocaleString()}</small>
-                    </Card.Body>
-                </Card>
+                            <br />
+                            {post.content}
+                        </p>
+                    </div>
+                    <small className="text-muted">Posted on {new Date(post.createdAt).toLocaleString()}</small>
+                </div>
             ))}
         </div>
     );

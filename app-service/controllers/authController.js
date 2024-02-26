@@ -14,11 +14,11 @@ const register = async (fullName, email, password) => {
 
         // Create a profile for the registered user
         const avatarUrl = 'https://placekitten.com/100/100'; // Provide a default avatar URL or allow the user to set it later
-        const address = ''; // Provide a default address or allow the user to set it later
+        const address = 'straight from linkedin'; // Provide a default address or allow the user to set it later
         const bio = 'Hey, I am new hear!'; // Provide a default bio or allow the user to set it later
         const erc20TokenBalance = 0; // Initial ERC-20 token balance
         const erc721TokenCount = 0; // Initial ERC-721 token count
-        await ProfileModel.createProfile({ userId, avatarUrl, address, bio, erc20TokenBalance, erc721TokenCount });
+        await ProfileModel.createProfile({ userId, avatarUrl, address, bio, erc20TokenBalance, erc721TokenCount, fullName });
 
         return userId;
     } catch (error) {

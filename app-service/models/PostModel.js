@@ -30,7 +30,18 @@ const createPost = async ({ userId, content }) => {
 };
 
 const getPosts = async () => {
-    const query = 'SELECT posts.*, author.full_name AS author FROM posts LEFT JOIN users AS author ON posts.userId = author.id ORDER BY posts.createdAt DESC';
+    const query = 'SELECT \n' +
+        '    posts.*,\n' +
+        '    author.full_name AS author,\n' +
+        '    profile.avatar_url AS author_avatar\n' +
+        'FROM \n' +
+        '    posts\n' +
+        'LEFT JOIN \n' +
+        '    users AS author ON posts.userId = author.id\n' +
+        'LEFT JOIN \n' +
+        '    profiles AS profile ON posts.userId = profile.userId\n' +
+        'ORDER BY \n' +
+        '    posts.createdAt DESC;\n';
 
     try {
         const [rows, fields] = await db.query(query);

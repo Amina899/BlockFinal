@@ -6,7 +6,7 @@ import Cookies from 'js-cookie'; // Import the Cookies library
 import Link from 'next/link';
 
 const NotificationIcon = ({ count }) => (
-    <Link href="#notifications">
+    <Link href="#notifications" passHref>
         <Nav.Link>
             <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -33,12 +33,34 @@ const NotificationIcon = ({ count }) => (
 const NavbarComponent = () => {
     const [isClient, setIsClient] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [notificationCount, setNotificationCount] = useState(3); // Example notification count
+    const [notificationCount, setNotificationCount] = useState(0);
 
     useEffect(() => {
         setIsClient(true);
         setIsLoggedIn(Cookies.get('isLoggedIn') === 'true');
-    }, []);
+
+        // Fetch friend requests and set notificationCount
+        const fetchFriendRequests = async () => {
+            try {
+                const response = await fetch(`http://localhost:4000/profiles/friend-requests/${Cookies.get('userId')}`);
+                const data = await response.json().then(json => {
+                    setNotificationCount(json.friendRequests.length)
+                });
+
+                if (response.ok) {
+                    console.log("fetched friend requests");
+                } else {
+                    console.error('Failed to fetch friend requests:', data.error);
+                }
+            } catch (error) {
+                console.error('Error fetching friend requests:', error);
+            }
+        };
+
+        if (isLoggedIn) {
+            fetchFriendRequests();
+        }
+    }, [isLoggedIn]);
 
     const handleLogout = () => {
         // Clear the session and reload the page
@@ -49,14 +71,16 @@ const NavbarComponent = () => {
     return (
         <Navbar bg="light" expand="lg">
             <Container>
-                <Navbar.Brand href="#home">
-                    <img
+                <Navbar.Brand>
+                    <Link href="/main">
+                        <img
                         src="/logo.png"
                         width="90"
                         height="50"
                         className="d-inline-block align-top"
                         alt="LinkedIn Logo"
-                    />
+                        />
+                    </Link>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
@@ -64,19 +88,23 @@ const NavbarComponent = () => {
                         <Nav.Link href="/main">Home</Nav.Link>
                         <Nav.Link href="#network">Network</Nav.Link>
                         <Nav.Link href="#jobs">Jobs</Nav.Link>
-                        <Nav.Link href="#notifications">Notifications</Nav.Link>
+                        <Nav.Link href="#learning">Learning</Nav.Link>
                     </Nav>
                     {isClient && isLoggedIn && (
                         <>
                             <Form className="d-flex">
                                 <FormControl type="text" placeholder="Search" className="mr-2" />
-                                <Button variant="outline-success">Search</Button>
+                                <Button variant="outline-light  ">
+                                    <span role="img" aria-label="Search">
+                                        🔍
+                                    </span>
+                                </Button>
                             </Form>
                             <Nav className="ms-2">
                                 {/* Display the user's avatar */}
-                                <Link href={`/profile/${Cookies.get.userId}`}>
+                                <Link href={`/profile/${Cookies.get('userId')}`}>
                                     <img
-                                        src="https://placekitten.com/100/100" // Replace with the URL of the user's actual avatar //
+                                        src="https://placekitten.com/100/100"
                                         alt="User Avatar"
                                         width="40"
                                         height="40"

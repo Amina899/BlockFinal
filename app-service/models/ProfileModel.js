@@ -2,11 +2,11 @@
 
 const db = require('../db');
 
-const createProfile = async ({ userId, avatarUrl, address, bio, erc20TokenBalance, erc721TokenCount }) => {
-    const query = 'INSERT INTO profiles (userId, avatar_url, address, bio, erc20_token_balance, erc721_token_count) VALUES (?, ?, ?, ?, ?, ?)';
+const createProfile = async ({ userId, avatarUrl, address, bio, erc20TokenBalance, erc721TokenCount, fullName }) => {
+    const query = 'INSERT INTO profiles (userId, avatar_url, address, bio, erc20_token_balance, erc721_token_count, full_name) VALUES (?, ?, ?, ?, ?, ?, ?)';
 
     try {
-        const [rows, fields] = await db.query(query, [userId, avatarUrl, address, bio, erc20TokenBalance, erc721TokenCount]);
+        const [rows, fields] = await db.query(query, [userId, avatarUrl, address, bio, erc20TokenBalance, erc721TokenCount, fullName]);
         console.log('Profile created:', rows);
         return rows.insertId;
     } catch (error) {

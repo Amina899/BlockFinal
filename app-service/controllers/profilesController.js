@@ -27,7 +27,10 @@ const createFriendRequest = async ({ senderId, receiverId, status }) => {
 };
 
 const getFriendRequests = async (userId) => {
-    const query = 'SELECT * FROM friend_requests WHERE receiverId = ? AND status = "pending"';
+    const query = 'SELECT friend_requests.*, users.full_name as sender_name\n' +
+        '        FROM friend_requests\n' +
+        '        JOIN users ON friend_requests.senderId = users.id\n' +
+        '        WHERE friend_requests.receiverId = ? AND friend_requests.status = \'pending\'';
 
     try {
         const [rows, fields] = await db.query(query, [userId]);
@@ -40,8 +43,7 @@ const getFriendRequests = async (userId) => {
 
 const getUserProfile = async (userId) => {
     try {
-        const userProfile = await ProfileModel.getUserProfile(userId);
-        return userProfile;
+        return await ProfileModel.getUserProfile(userId);
     } catch (error) {
         console.error('Error getting user profile:', error);
         throw error;
@@ -49,34 +51,30 @@ const getUserProfile = async (userId) => {
 
 };
 
-const handleAsyncError = (fn) => (req, res, next) => {
-    Promise.resolve(fn(req, res, next)).catch(next);
-};
-
-// Function to get friend requests
-const getIfFriendRequests = handleAsyncError(async (req, res) => {
-    const { userId } = req.params;
-
-    const query = 'SELECT * FROM friend_requests WHERE receiver_id = ?';
-
+const getRecentUsers = async (req, res) => {
     try {
-        const [rows, fields] = await db.query(query, [userId]);
-        res.json({ success: true, friendRequests: rows });
+        // Fetch the last 5 registered users from the database
+        return await db.query('SELECT users.*, profiles.avatar_url\n' +
+            '      FROM users\n' +
+            '      LEFT JOIN profiles ON users.id = profiles.userId\n' +
+            '      ORDER BY users.id DESC\n' +
+            '      LIMIT 5');
     } catch (error) {
-        console.error('Error getting friend requests:', error);
-        res.status(500).json({ success: false, error: 'Failed to retrieve friend requests' });
+        console.error('Error fetching recently registered users:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
-});
+}
+
 
 // Function to send friend request
-const sendFriendRequest = handleAsyncError(async (req, res) => {
-    const { userId } = req.params;
-    const senderId = req.body.senderId; // Assuming senderId is provided in the request body
+const sendFriendRequest = async (req, res) => {
+    const senderId = req.body.senderId; // Use senderId consistently
+    const receiverId = req.body.receiverId; // Use receiverId consistently
 
-    const insertQuery = 'INSERT INTO friend_requests (sender_id, receiver_id) VALUES (?, ?)';
+    const insertQuery = 'INSERT INTO friend_requests (senderId, receiverId) VALUES (?, ?)';
 
     try {
-        const [result] = await db.query(insertQuery, [senderId, userId]);
+        const [result] = await db.query(insertQuery, [senderId, receiverId]);
         const requestId = result.insertId;
 
         res.json({ success: true, requestId });
@@ -84,15 +82,72 @@ const sendFriendRequest = handleAsyncError(async (req, res) => {
         console.error('Error sending friend request:', error);
         res.status(500).json({ success: false, error: 'Failed to send friend request' });
     }
-});
+};
 
+
+const getFriends = async (req, res) => {
+    const { userId } = req.params;
+
+    const query = `
+        SELECT users.id, users.full_name
+        FROM friends
+        JOIN users ON friends.userId2 = users.id
+        WHERE friends.userId1= ?
+    `;
+
+    try {
+        const [rows, fields] = await db.query(query, [userId]);
+        res.json({ success: true, friendsList: rows });
+    } catch (error) {
+        console.error('Error getting friends list:', error);
+        res.status(500).json({ success: false, error: 'Failed to retrieve friends list' });
+    }
+};
+
+const acceptFriendRequest = async (req, res) => {
+    const { requestId } = req.body;
+
+    try {
+        // Update friend request status to 'accepted'
+        await db.query('UPDATE friend_requests SET status = "accepted" WHERE id = ?', [requestId]);
+
+        // Get senderId and receiverId from the friend request
+        const [friendRequest] = await db.query('SELECT * FROM friend_requests WHERE id = ?', [requestId]);
+        const { senderId, receiverId } = friendRequest[0];
+
+        // Add friendship to the friends table
+        await db.query('INSERT INTO friends (userId1, userId2) VALUES (?, ?), (?, ?)', [senderId, receiverId, receiverId, senderId]);
+
+        res.json({ success: true, message: 'Friend request accepted successfully.' });
+    } catch (error) {
+        console.error('Error accepting friend request:', error);
+        res.status(500).json({ success: false, error: 'Failed to accept friend request' });
+    }
+};
+
+const rejectFriendRequest = async (req, res) => {
+    const { requestId } = req.body;
+
+    try {
+        // Update friend request status to 'rejected'
+        await db.query('UPDATE friend_requests SET status = "rejected" WHERE id = ?', [requestId]);
+
+        res.json({ success: true, message: 'Friend request rejected successfully.' });
+    } catch (error) {
+        console.error('Error rejecting friend request:', error);
+        res.status(500).json({ success: false, error: 'Failed to reject friend request' });
+    }
+};
 
 
 module.exports = {
     addProfile,
     createFriendRequest,
     getUserProfile,
+    getRecentUsers,
     getFriendRequests,
-    getIfFriendRequests,
-    sendFriendRequest
+    sendFriendRequest,
+    acceptFriendRequest,
+    rejectFriendRequest,
+    getFriends
 };

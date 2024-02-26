@@ -25,6 +25,15 @@ router.post('/add', async (req, res) => {
     }
 });
 
+// Accept friend request
+router.post('/accept-friend-request', profilesController.acceptFriendRequest);
+
+// Reject friend request
+router.post('/reject-friend-request', profilesController.rejectFriendRequest);
+
+// Get users friends
+router.get('/friends/:userId', profilesController.getFriends);
+
 // Get friend requests for a user
 router.get('/friend-requests/:userId', async (req, res) => {
     const { userId } = req.params;
@@ -51,6 +60,20 @@ router.get('/:userId', async (req, res) => {
 });
 
 router.post('/send-friend-request/:userId', profilesController.sendFriendRequest);
+
+// Endpoint for fetching recently registered users
+router.get('/users/recently-registered', async (req, res) => {
+    try {
+        // Fetch the last 5 registered users from the database
+        const recentUsers = await profilesController.getRecentUsers();
+
+        res.json({ recentUsers });
+    } catch (error) {
+        console.error('Error fetching recently registered users:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 
 
 
