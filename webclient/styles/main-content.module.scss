@@ -1,0 +1,37 @@
+/* styles/main-content.module.scss */
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+}
+
+.section-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.postContainer {
+  border: 1px solid #0070f3; /* Thin blue outline */
+  border-radius: 10px; /* Rounded container */
+  padding: 10px;
+  margin-bottom: 10px;
+
+  img {
+    width: 40px; /* Adjust as needed */
+    height: 40px; /* Adjust as needed */
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+
+  .postContent {
+    display: flex;
+    align-items: center;
+
+    p {
+      margin: 0;
+    }
+  }
+}
+
+
+/* Add more styles for specific components or sections as needed */

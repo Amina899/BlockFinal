@@ -1,0 +1,43 @@
+// styles/index.module.scss
+
+$primaryColor: #0070f3;
+$secondaryColor: #333;
+$successColor: green;
+
+.container {
+  text-align: center;
+  padding: 20px;
+
+  h1 {
+    color: $primaryColor;
+  }
+
+  .registered-message {
+    margin-top: 20px;
+    font-size: 18px;
+    color: $successColor;
+  }
+
+  .auth-section {
+    margin-top: 20px;
+
+    h2 {
+      font-size: 24px;
+    }
+
+    p {
+      font-size: 16px;
+      color: $secondaryColor;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: $primaryColor;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  }
+}

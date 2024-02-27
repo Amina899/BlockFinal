@@ -1,0 +1,142 @@
+/* styles/profile.module.scss */
+
+@import 'header';
+@import 'footer';
+
+.userProfileContainer {
+  padding: 20px;
+  margin: 0 40px;
+  border: 1px solid #0070f3; /* Thin blue outline */
+  border-radius: 10px; /* Rounded container */
+
+  h1 {
+    color: #0070f3;
+  }
+
+  .userDetailsContainer {
+    display: flex;
+    margin-top: 20px;
+
+    .avatarContainer {
+      margin-right: 20px;
+
+      img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+      }
+    }
+
+    .userInfo {
+      display: flex;
+      flex-direction: column;
+
+      p {
+        margin: 5px 0;
+      }
+    }
+  }
+
+  .friendsListContainer {
+    flex-grow: 1; /* Added to make the friends list take remaining space */
+    margin-left: 50px;
+
+    h2 {
+      margin-bottom: 10px;
+      text-decoration: underline #0070f3; /* Blue underline */
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+
+      li {
+        margin: 5px 0;
+      }
+    }
+  }
+
+  .friendRequestsContainer {
+    margin-top: 20px;
+
+    h2 {
+      margin-bottom: 10px;
+      text-decoration: underline #0070f3; /* Blue underline */
+    }
+
+    .friendRequest {
+      margin-top: 10px;
+      border: 1px solid #0070f3; /* Thin blue outline */
+      border-radius: 5px; /* Rounded container */
+      padding: 10px;
+
+      p {
+        margin: 5px 0;
+      }
+
+      .acceptButton,
+      .rejectButton {
+        padding: 8px 16px;
+        margin-right: 10px;
+        font-size: 14px;
+        background-color: #28a745; // Accept button color
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+
+        &.rejectButton {
+          background-color: #dc3545; // Reject button color
+        }
+      }
+    }
+  }
+
+  .sendFriendRequestContainer {
+    margin-top: 20px;
+    margin-right: 60px;
+
+    h2 {
+      margin-bottom: 10px;
+      text-decoration: underline #0070f3; /* Blue underline */
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+
+      label {
+        margin-bottom: 10px;
+      }
+
+      input {
+        padding: 8px;
+        margin-bottom: 10px;
+        margin-left: 10px;
+      }
+
+      button {
+        padding: 10px;
+        font-size: 16px;
+        background-color: #0070f3; // Button color
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    }
+  }
+}
+.successMessage {
+  background-color: #28a745; /* Bootstrap success color */
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.containerFlex {
+  display: flex;
+  justify-content: space-around ; /* Added to position user details and friends list */
+}
