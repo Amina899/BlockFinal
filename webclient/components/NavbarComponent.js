@@ -71,17 +71,7 @@ const NavbarComponent = () => {
     return (
         <Navbar bg="light" expand="lg">
             <Container>
-                <Navbar.Brand>
-                    <Link href="/main">
-                        <img
-                        src="/logo.png"
-                        width="90"
-                        height="50"
-                        className="d-inline-block align-top"
-                        alt="LinkedIn Logo"
-                        />
-                    </Link>
-                </Navbar.Brand>
+
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
@@ -92,14 +82,6 @@ const NavbarComponent = () => {
                     </Nav>
                     {isClient && isLoggedIn && (
                         <>
-                            <Form className="d-flex">
-                                <FormControl type="text" placeholder="Search" className="mr-2" />
-                                <Button variant="outline-light  ">
-                                    <span role="img" aria-label="Search">
-                                        🔍
-                                    </span>
-                                </Button>
-                            </Form>
                             <Nav className="ms-2">
                                 {/* Display the user's avatar */}
                                 <Link href={`/profile/${Cookies.get('userId')}`}>

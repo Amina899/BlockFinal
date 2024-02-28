@@ -7,14 +7,13 @@ const ProfileModel = require('../models/ProfileModel');
 const saltRounds = 10;
 
 // Register a new user
-const register = async (fullName, email, password) => {
+const register = async (fullName, email, password, address) => {
     try {
         const hashedPassword = await bcrypt.hash(password, saltRounds);
         const userId = await UserModel.createUser({ fullName, email, password: hashedPassword });
 
         // Create a profile for the registered user
         const avatarUrl = 'https://placekitten.com/100/100'; // Provide a default avatar URL or allow the user to set it later
-        const address = 'straight from linkedin'; // Provide a default address or allow the user to set it later
         const bio = 'Hey, I am new hear!'; // Provide a default bio or allow the user to set it later
         const erc20TokenBalance = 0; // Initial ERC-20 token balance
         const erc721TokenCount = 0; // Initial ERC-721 token count

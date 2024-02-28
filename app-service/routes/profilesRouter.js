@@ -2,7 +2,7 @@
 
 const express = require('express');
 const profilesController = require('../controllers/profilesController');
-
+const UserModel = require('../models/UserModel');
 const router = express.Router();
 
 // Create a new profile
@@ -47,6 +47,18 @@ router.get('/friend-requests/:userId', async (req, res) => {
     }
 });
 
+router.get('/users', async (req, res) => {
+    try {
+        const userProfile = await UserModel.getLatestUsers();
+        res.json({ success: true, userProfile });
+    } catch (error) {
+        console.error('Error getting user profile:', error);
+        res.status(500).json({ success: false, error: 'Failed to retrieve user profile' });
+    }
+}
+)
+
+
 // Get a user's profile by userId
 router.get('/:userId', async (req, res) => {
     try {
@@ -73,7 +85,6 @@ router.get('/users/recently-registered', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
-
 
 
 

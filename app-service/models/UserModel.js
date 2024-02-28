@@ -27,7 +27,20 @@ const getUserByEmail = async (email) => {
     }
 };
 
+const getLatestUsers = async () => {
+    const query = 'SELECT users.*, profiles.avatar_url FROM users JOIN profiles ON users.id = profiles.userId ORDER BY users.id DESC LIMIT 5;';
+
+    try {
+        const [rows, fields] = await db.query(query);
+        return rows;
+    } catch (error) {
+        console.error('Error getting user by email:', error);
+        throw error;
+    }
+};
+
 module.exports = {
     createUser,
-    getUserByEmail
+    getUserByEmail,
+    getLatestUsers
 };

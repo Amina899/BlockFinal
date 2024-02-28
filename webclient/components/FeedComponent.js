@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Form, Button, Card } from 'react-bootstrap';
 import Cookies from 'js-cookie';
 import styles from '../styles/main-content.module.scss';
+import RecentlyRegisteredUsers from "./RecentlyRegisteredUsers";
 
 const FeedComponent = () => {
     const [posts, setPosts] = useState([]);
@@ -67,36 +68,43 @@ const FeedComponent = () => {
 
     return (
         <div className="container mt-3">
-            <h3>Recent Posts</h3>
+            <h3 >What's new</h3>
+            <div className={styles.contentContainer}>
 
-            {/* Form to submit new posts */}
-            <Form onSubmit={handlePostSubmit} className="mb-3">
-                <Form.Group controlId="formNewPost">
-                    <Form.Control
-                        type="text"
-                        placeholder="What's on your mind?"
-                        value={newPost}
-                        onChange={(e) => setNewPost(e.target.value)}
-                    />
-                </Form.Group>
-                <Button variant="primary" type="submit">
-                    Post
-                </Button>
-            </Form>
-
-            {posts.map((post) => (
-                <div key={post.id} className={styles.postContainer}>
-                    <div className={styles.postContent}>
-                        <img src={post.author_avatar} alt="Author Avatar" />
-                        <p>
-                            <strong>{post.author}</strong>
-                            <br />
-                            {post.content}
-                        </p>
+                {posts.map((post) => (
+                    <div key={post.id} className={styles.postContainer}>
+                        <div className={styles.postContent}>
+                            <img src={post.author_avatar} alt="Author Avatar" />
+                            <p>
+                                <strong>{post.author}</strong>
+                                <br />
+                                {post.content}
+                            </p>
+                        </div>
+                        <small className="text-muted">Date: {new Date(post.createdAt).toLocaleString()}</small>
                     </div>
-                    <small className="text-muted">Posted on {new Date(post.createdAt).toLocaleString()}</small>
+                ))}
+
+                {/* Form to submit new posts */}
+                <form onSubmit={handlePostSubmit}>
+                    <input type="text"
+                           placeholder="Share your news!"
+                           value={newPost}
+                           onChange={(e) => setNewPost(e.target.value)}>
+
+                    </input>
+                    <button type="submit">
+                        Publish
+                    </button>
+                </form>
+            </div>
+
+            <div className={styles.contentContainer}>
+                <div className={styles.recentUsers}>
+                <RecentlyRegisteredUsers />
                 </div>
-            ))}
+            </div>
+
         </div>
     );
 };
