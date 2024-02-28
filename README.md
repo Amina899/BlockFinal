@@ -50,19 +50,24 @@
 ## Demo Screenshots
 ### Profile Page
 
-![image](https://github.com/Amina899/BlockFinal/assets/124548089/3bcdcd3d-51b0-439d-aa4f-9d49ce00db3b)
+![image](https://github.com/Amina899/BlockFinal/assets/124548089/237c0ced-ca70-4a5e-9c66-cafd9bf1d187)
 
 The profile page displays detailed user information, including the avatar, address, bio, token balance, and token count. Users can customize their profiles and showcase their NFTs.
 
 ### Main Page
 
-![image](https://github.com/Amina899/BlockFinal/assets/124548089/db13d95d-594e-4e1b-9b8e-3ebb4aeaebce)
+
+![image](https://github.com/Amina899/BlockFinal/assets/124548089/637d1f88-43d0-43e3-a07e-30af3793eaa6)
+
+![image](https://github.com/Amina899/BlockFinal/assets/124548089/e3fd2eeb-1aba-44ad-a7be-e7f6bc77fb46)
+
+![image](https://github.com/Amina899/BlockFinal/assets/124548089/3c925913-8c27-472a-b152-fd51b6e1c089)
 
 The main page serves as the central hub for users, providing access to the news feed, network connections, job postings, and notifications. Users can stay informed about updates from their connections.
 
 ### Register Page
 
-![image](https://github.com/Amina899/BlockFinal/assets/124548089/2b2d9801-bfca-4429-9965-c87f86f8ded5)
+![image](https://github.com/Amina899/BlockFinal/assets/124548089/bff92250-70e2-4f41-bebc-8641506eee28)
 
 The registration page allows new users to create accounts securely. It includes a user-friendly form for entering essential details, ensuring a smooth onboarding process.
 
