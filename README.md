@@ -11,9 +11,6 @@ The primary objective of this project is to revolutionize the concept of social 
 ### Dynamic Professional Networking:
 Seamless connectivity unfolds as users engage in decentralized networking, forming meaningful connections with peers. This fosters an ecosystem where collaboration and professional growth thrive.
 
-### Immutable Data Storage on IPFS:
-Embracing decentralization, all user data finds a home on IPFS (InterPlanetary File System), ensuring that every piece of information remains tamper-proof, secure, and accessible across the distributed network.
-
 # Screenshots:
 
 # Lisence:
