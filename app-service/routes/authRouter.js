@@ -7,10 +7,10 @@ const router = express.Router();
 
 // Registration
 router.post('/register', async (req, res) => {
-    const { fullName, email, password } = req.body;
+    const { fullName, email, password, address } = req.body;
 
     try {
-        const userId = await authController.register(fullName, email, password);
+        const userId = await authController.register(fullName, email, password, address);
         res.json({ success: true, userId, full_name: fullName });
     } catch (error) {
         console.error('Registration error:', error);

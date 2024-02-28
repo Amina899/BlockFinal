@@ -209,7 +209,22 @@ const ProfilePage = () => {
                         </ul>
                     </div>
 
-
+                    {/* Display friend requests */}
+                    <div className={styles.friendRequestsContainer}>
+                        <h2>Friend Requests</h2>
+                        {friendRequests.map((request) => (
+                            <div key={request.id} className={styles.friendRequest}>
+                                {/* Display friend request information */}
+                                <p>From: {request.sender_name}</p>
+                                <Button variant="success" onClick={() => handleAcceptRequest(request.id)}>
+                                    Accept
+                                </Button>
+                                <Button variant="danger" onClick={() => handleRejectRequest(request.id)}>
+                                    Reject
+                                </Button>
+                            </div>
+                        ))}
+                    </div>
 
                     {/* Input field for recipient's ID or name */}
                     <div className={styles.sendFriendRequestContainer}>
@@ -236,23 +251,6 @@ const ProfilePage = () => {
                             {successMessage}
                         </div>
                     )}
-
-                    {/* Display friend requests */}
-                    <div className={styles.friendRequestsContainer}>
-                        <h2>Friend Requests</h2>
-                        {friendRequests.map((request) => (
-                        <div key={request.id} className={styles.friendRequest}>
-                            {/* Display friend request information */}
-                            <p>From: {request.sender_name}</p>
-                            <Button variant="success" onClick={() => handleAcceptRequest(request.id)}>
-                                Accept
-                            </Button>
-                            <Button variant="danger" onClick={() => handleRejectRequest(request.id)}>
-                                Reject
-                            </Button>
-                        </div>
-                        ))}
-                    </div>
                 </div>
             </div>
             <FooterComponent />

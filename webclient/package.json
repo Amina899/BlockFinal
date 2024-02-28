@@ -6,8 +6,9 @@
     "start": "next start"
   },
   "dependencies": {
+    "@3rdweb/hooks": "^1.9.2",
     "bootstrap": "^5.3.3",
-    "ethers": "^6.11.0",
+    "ethers": "^6.11.1",
     "js-cookie": "^3.0.5",
     "next": "latest",
     "react": "18.2.0",
@@ -15,7 +16,7 @@
     "react-dom": "18.2.0",
     "react-query": "^3.39.3",
     "sass": "^1.70.0",
-    "web3": "^4.4.0"
+    "web3": "^4.5.0"
   },
   "engines": {
     "node": ">=18"

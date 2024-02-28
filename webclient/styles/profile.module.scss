@@ -29,6 +29,7 @@
 
     .userInfo {
       display: flex;
+      flex-wrap: wrap;
       flex-direction: column;
 
       p {
@@ -38,7 +39,7 @@
   }
 
   .friendsListContainer {
-    flex-grow: 1; /* Added to make the friends list take remaining space */
+    flex-basis: 100%;
     margin-left: 50px;
 
     h2 {
@@ -57,7 +58,9 @@
   }
 
   .friendRequestsContainer {
+    flex-basis: 100%;
     margin-top: 20px;
+    margin-right: 100px;
 
     h2 {
       margin-bottom: 10px;
@@ -93,6 +96,7 @@
   }
 
   .sendFriendRequestContainer {
+    flex-basis: 100%;
     margin-top: 20px;
     margin-right: 60px;
 
@@ -138,5 +142,4 @@
 
 .containerFlex {
   display: flex;
-  justify-content: space-around ; /* Added to position user details and friends list */
 }

@@ -3,6 +3,7 @@
 const db = require('../db');
 
 const createProfile = async ({ userId, avatarUrl, address, bio, erc20TokenBalance, erc721TokenCount, fullName }) => {
+    console.log('Received values:', { userId, avatarUrl, address, bio, erc20TokenBalance, erc721TokenCount, fullName });
     const query = 'INSERT INTO profiles (userId, avatar_url, address, bio, erc20_token_balance, erc721_token_count, full_name) VALUES (?, ?, ?, ?, ?, ?, ?)';
 
     try {
